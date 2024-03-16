@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>create_category</title>
 </head>
 <body>
-<form method="POST">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Cохраненить</button>
+<form method="Post">
+    {% csrf_token%}
+    {{form.as_p}}
+    <button>Сохранить</button>
     <a href="/" style="color: black;">На главную</a>
 </form>
 </body>

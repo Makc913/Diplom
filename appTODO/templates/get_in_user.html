@@ -5,7 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-{{user.username}}
+
+{% for i in task %}
+<p>  {{ i.category }} </p>
+
+{% endfor %}
 <a href="/" style="color: black;">На главную</a>
 </body>
 </html>

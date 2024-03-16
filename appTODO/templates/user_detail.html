@@ -1,0 +1,24 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Detail</title>
+</head>
+<body>
+    <h1>Данные пользователя</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <input type="text" name="user_id" placeholder="Enter User ID">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if user %}
+        <h2>Пользователь: {{ user.username }}</h2>
+        <p>Email: {{ user.email }}</p>
+    {% else %}
+        <p>Пользователь не найден</p>
+    {% endif %}
+    <a href="/" style="color: black;">На главную</a>
+</body>
+</html>
