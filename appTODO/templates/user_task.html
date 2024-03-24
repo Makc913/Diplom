@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% for task in tasks %}
+<h2>{{ task.title }}</h2>
+<p>{{ task.description }}</p>
+{% endfor %}
+<a href="/" style="color: black;">На главную</a>

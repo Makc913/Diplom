@@ -36,11 +36,17 @@ def all_users(request):
 
 
 def pers_user(reqest, user_id):
-    user = get_object_or_404(User, pk=user_id)
+    """
+    Получение объекта пользователя по его идентификатору
+    :param reqest: Запрос от клиента
+    :param user_id: Идентификатор пользователя
+    :return: Ответ с отображением шаблона и контекстом
+    """
+    user = get_object_or_404(User, pk=user_id)  # Получение объекта пользователя по идентификатору
     context = {
-        'user': user,
+        'user': user,  # Создание контекста с объектом пользователя
     }
-    return render(reqest, 'pers_user.html', context)
+    return render(reqest, 'pers_user.html', context)  # Отображение шаблона 'pers_user.html' с передачей контекста
 
 def create_task(request):
     """
@@ -113,18 +119,29 @@ def get_task_user(request):
     return render(request, "get_task_user.html", context)
 
 def user_detail(request):
-    user = None
+    """
+    Возвращает детали пользователя на основе переданного 'user_id'
+    :param request: Запрос от клиента
+    :return: Ответ с отображением шаблона и контекстом
+    """
+    user = None  # Инициализация переменной user
 
-    if request.method == 'POST':
-        user_id = request.POST.get('user_id')
+    if request.method == 'POST':  # Проверка метода запроса
+        user_id = request.POST.get('user_id')  # Получение значения 'user_id' из POST-запроса
         try:
-            user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
+            user = User.objects.get(id=user_id)  # Поиск пользователя по заданному 'user_id'
+        except User.DoesNotExist:  # Обработка исключения, если пользователь не найден
             user = None
 
-    return render(request, 'user_detail.html', {'user': user})
+    return render(request, 'user_detail.html', {'user': user})  # Отображение шаблона 'user_detail.html' с передачей контекста
 
-def next_page(request):
-    request.session.flush()
-    return redirect('/')
-"""очищает данные сессии с помощью метода"""
+def user_task(request):
+    """
+    Отображает список задач пользователя.
+
+    :param request: Запрос от клиента.
+    :return: Отрендеренный шаблон с списком задач.
+    """
+    user = request.user
+    tasks = Task.objects.filter(created_by=user)
+    return render(request, 'user_task.html', {'tasks': tasks})
